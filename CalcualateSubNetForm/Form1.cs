@@ -50,5 +50,10 @@ namespace CalcualateSubNetForm
             }
             uc_ChiaSubnet.Instance.BringToFront();
         }
+
+        private void accordionControl1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -64,6 +64,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\SubnetClass.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,7 +73,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="global\enum_global.cs" />
     <Compile Include="SubnetHelper.cs" />
+    <Compile Include="Controller\UnRedo.cs" />
+    <Compile Include="test\XtraUserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="test\XtraUserControl1.Designer.cs">
+      <DependentUpon>XtraUserControl1.cs</DependentUpon>
+    </Compile>
     <Compile Include="uc_ChiaSubnet.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -93,6 +102,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="test\XtraUserControl1.resx">
+      <DependentUpon>XtraUserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uc_ChiaSubnet.resx">
       <DependentUpon>uc_ChiaSubnet.cs</DependentUpon>

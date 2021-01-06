@@ -14,7 +14,7 @@ namespace CalcualateSubNetForm
     {
         public enum PackageType
         {
-            CTS_ClassAtFirst,
+            CTS_SubnetOne,
             STC_PackageReset,
             STC_Result,
             CTS_PackageToCalculate,
@@ -31,7 +31,8 @@ namespace CalcualateSubNetForm
         string host_Address_Range;
         string subnetID;
         string broadcastAddress;
-
+        string ipAddressNext;
+        bool isEmptySubnet = false;
 
         int subnetBits;
         int maskBits;
@@ -39,7 +40,9 @@ namespace CalcualateSubNetForm
         int hostPerSubnets;
         int smallestFirstOctel;
         int biggestFirstOctel;
-
+        int maskNumber;
+        int maskNumberNext;
+        int maxHost = -1;
 
         List<string> liSubnetMask;
         List<int> liSubnetBits;
@@ -47,10 +50,12 @@ namespace CalcualateSubNetForm
         List<int> liMaximumSubnets;
         List<int> liHostPerSubnets;
 
+
         public PackageType Package_Type { get { return packageType; } set { packageType = value; } }
         public Class Class_subnet { get { return class_subnet; } set { class_subnet = value; } }
         public string SubnetMask { get { return subnetMask; } set { subnetMask = value; } }
         public string IpAddress { get => ipAddress; set => ipAddress = value; }
+        public string IpAddressNext { get => ipAddressNext; set => ipAddressNext = value; }
         public string Host_Address_Range { get => host_Address_Range; set => host_Address_Range = value; }
         public string BroadcastAddress { get => broadcastAddress; set => broadcastAddress = value; }
         public string SubnetID { get => subnetID; set => subnetID = value; }
@@ -60,6 +65,9 @@ namespace CalcualateSubNetForm
         public int HostperSubnets { get { return hostPerSubnets; } set { hostPerSubnets = value; } }
         public int SmallestFirstOctel { get => smallestFirstOctel; set => smallestFirstOctel = value; }
         public int BiggestFirstOctel { get => biggestFirstOctel; set => biggestFirstOctel = value; }
+        public int Masknumber { get => maskNumber; set => maskNumber = value; }
+        public int MaskNumberNext { get => maskNumberNext; set => maskNumberNext = value; }
+        public int MaxHost { get => maxHost; set => maxHost = value; }
 
         public List<string> LiSubnetMask { get => liSubnetMask; set => liSubnetMask = value; }
         public List<int> LiSubnetBits { get => liSubnetBits; set => liSubnetBits = value; }
@@ -67,24 +75,28 @@ namespace CalcualateSubNetForm
         public List<int> LiMaximumSubnets { get => liMaximumSubnets; set => liMaximumSubnets = value; }
         public List<int> LiHostPerSubnets { get => liHostPerSubnets; set => liHostPerSubnets = value; }
 
+        public bool IsEmptySubnet { get => isEmptySubnet; set => isEmptySubnet = value; }
 
         public Package()
         {
             Initial_value();
         }
-        public Package(PackageType packageType, Package.Class class_subnet)
+        public Package(PackageType packageType, string strIpAddress, int iMaskNumber, int maxHost)
         {
-            // gởi CTS_ClassAtFirst,
+            // gởi CTS_SubnetOne,
             Initial_value();
             this.packageType = packageType;
-            this.class_subnet = class_subnet;
+            this.ipAddress = strIpAddress;
+            this.maskNumber = iMaskNumber;
+            this.maxHost = maxHost;
         }
-        public Package(PackageType packageType, String Ip_Address, string Subnet_Mask)
+        public Package(PackageType packageType, String Ip_Address, int maskNumber, string Subnet_Mask)
         {
             // gởi CTS_PackgeToCalculate
             this.packageType = packageType;
             this.ipAddress = Ip_Address;
             this.subnetMask = Subnet_Mask;
+            this.maskNumber = maskNumber;
         }
         private void Initial_value()
         {
@@ -94,6 +106,5 @@ namespace CalcualateSubNetForm
             liMaximumSubnets = new List<int>();
             liHostPerSubnets = new List<int>();
         }
-
     }
 }

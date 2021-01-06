@@ -8,7 +8,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using System.Drawing.Drawing2D;
+using System.Net.Sockets;
+using System.IO;
+using System.Net;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.RegularExpressions;
+using CalcualateSubNetForm.global;
+
+using CalcualateSubNetForm.Model;
 
 namespace CalcualateSubNetForm
 {
@@ -31,20 +38,36 @@ namespace CalcualateSubNetForm
         {
             InitializeComponent();
         }
-        private void Ketnoi()
+
+        TcpClient client = uc_ChiaSubnet.Instance.client;
+        StreamReader streamReader = uc_ChiaSubnet.Instance.reader;
+        StreamWriter StreamWriter = uc_ChiaSubnet.Instance.writer;
+
+
+        private void button1_Click(object sender, EventArgs e)
         {
+            IPAddress ip_adress = IPAddress.Parse(tbIPaddress.Text);
+
+            try
+            {
+                tb1.Text = string.Empty;
+                tb1.Text = tb1.Text  + "- Đang kết nối tới server........ \r\n";
+                client = new TcpClient(ip_adress.ToString(), int.Parse(tbPort.Text));
+                tb1.Text = tb1.Text + "\n" + "- Kết nối đến server thành công";
+
+                //Console.WriteLine("Connection Successful!");
+                streamReader = new StreamReader(client.GetStream());
+                StreamWriter = new StreamWriter(client.GetStream());
+            }
+            catch (Exception ex)
+            {
+                tb1.Text = tb1.Text + "\n" + "- Error: " + ex.Message;
+            }
+            uc_ChiaSubnet.Instance.client = client;
+            uc_ChiaSubnet.Instance.reader = streamReader;
+            uc_ChiaSubnet.Instance.writer = StreamWriter;
+
 
         }
-
-        private void XtraUserControl1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        
     }
 }

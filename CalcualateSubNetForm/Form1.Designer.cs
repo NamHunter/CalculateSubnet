@@ -60,6 +60,7 @@
             this.accordionControl1.Size = new System.Drawing.Size(173, 555);
             this.accordionControl1.TabIndex = 1;
             this.accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
+            this.accordionControl1.Click += new System.EventHandler(this.accordionControl1_Click);
             // 
             // ace_Ketnoi
             // 
